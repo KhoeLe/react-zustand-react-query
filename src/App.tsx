@@ -1,6 +1,7 @@
 import './App.css'
 import CardBox from './components/card'
 
+// https://jsonplaceholder.typicode.com/todos
 function App() {
 
   return (
@@ -15,7 +16,7 @@ function App() {
       </div>
 
       <div className='px-12 py-12 flex flex-1 justify-center content-center'>
-        <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5`}>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <CardBox />
           <CardBox />
           <CardBox />

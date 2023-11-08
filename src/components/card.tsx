@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { ToastAction } from "./ui/toast";
 import { useToast } from "./ui/use-toast";
 
 function CardBox() {
@@ -17,14 +16,14 @@ function CardBox() {
 
   const handleAction = () => {
     toast({
-        title: "Account deleted.",
-        description: "We've permanently deleted your account.",
-        action: <ToastAction altText="">Undo</ToastAction>,
+      variant: "destructive",
+      title: "Account deleted.",
+      description: "We've permanently deleted your account.",
     })
 
   };
   return (
-    <div>
+    <div className="flex justify-center ">
       <Card>
         <CardHeader>
           <CardTitle>Card Title</CardTitle>
@@ -38,18 +37,27 @@ function CardBox() {
           />
         </CardContent>
 
-        <div className="flex justify-between px-4 py-4">
-          <DialogCloseButton />
+        <div className="flex justify-between px-2 mx-2 py-4 lg:px-4">
+          {/* <DialogCloseButton  /> */}
+          <DialogCloseButton
+            title="Edit Profile"
+            description="Make changes to your profile here. Click save when you're done."
+            triggerContent={<Button variant="outline">Edit</Button>}
+            inputFields={[
+              { label: 'Name', id: 'name', defaultValue: 'Pedro Duarte' },
+              { label: 'Username', id: 'username', defaultValue: '@peduarte' },
+              { label: 'Password', id: 'password', defaultValue: '@peduarte', type: 'password' },
+              // Add more input field configurations as needed
+            ]}
+          />
           <AlertDialogMes handleAction={handleAction} text="Delete" variant="destructive" title="Are you absolutely sure?" desc="This action cannot be undone. This will permanently delete your
           account and remove your data from our servers."/>
         </div>
       </Card>
-
-
     </div>
 
 
-    
+
   );
 }
 
