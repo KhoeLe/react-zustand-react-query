@@ -1,5 +1,5 @@
+import CardBox from 'components/card'
 import './App.css'
-import CardBox from './components/card'
 
 // https://jsonplaceholder.typicode.com/todos
 function App() {
