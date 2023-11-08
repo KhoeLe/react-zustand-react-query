@@ -1,42 +1,56 @@
 import './App.css'
 import CardBox from './components/card'
 import { Button } from './components/ui/button'
+import { useToast } from './components/ui/use-toast'
 
 // https://jsonplaceholder.typicode.com/todos
 function App() {
 
-    const body = {
-      
-        "emailTo": "ngockhoe.le@kepland.com.vn",
-        "token": "YnKePgTZVn9ohthTwAfQxQL0Fu1zWnQfKbJmFJGTV7HW73XQ9FUA",
-        "requestedBy": "Khoe Le",
-        "emailCC": "ngockhoe.le@kepland.com.vn",
-        "approvalPerson": "A. Thien",
-        "requestCode": "azkxfk3k2k32k",
-        "requestDescription": "ke ba tao diii",
-        "categoryName": "ví duu",
-        "requestDisplayName": "ai biet",
-        "linkOfRequest": "https://portal.keppland.com.vn",
-        "type": 2
+  const { toast } = useToast()
+  const body = {
+
+    "emailTo": "ngockhoe.le@kepland.com.vn",
+    "token": "YnKePgTZVn9ohthTwAfQxQL0Fu1zWnQfKbJmFJGTV7HW73XQ9FUA",
+    "requestedBy": "Khoe Le",
+    "emailCC": "ngockhoe.le@kepland.com.vn",
+    "approvalPerson": "A. Thien",
+    "requestCode": "azkxfk3k2k32k",
+    "requestDescription": "ke ba tao diii",
+    "categoryName": "ví duu",
+    "requestDisplayName": "ai biet",
+    "linkOfRequest": "https://portal.keppland.com.vn",
+    "type": 2
+  }
+
+  const url = 'https://klvportalapidev.azurewebsites.net/api/Common/EASSendEmail'
+
+  const handleSendEmail = async () => {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+      toast({
+        variant: 'success',
+        title: 'Send Email.',
+        description: 'Send Email Success.',
+      });
+
+      console.log(res);
+      console.log(data);
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Send Email.',
+        description: 'Send Email error.',
+      });
     }
-
-    const url = 'https://klvportalapidev.azurewebsites.net/api/Common/EASSendEmail'
-
-    const handleSendEmail  = async () => {
-        const res = await fetch(url, {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify(body)
-        })
-
-        console.log(res)
-
-        const data = await res.json()
-
-        console.log(data)
-    }
+  };
 
   return (
     <div className='py-12 px-12 relative'>
