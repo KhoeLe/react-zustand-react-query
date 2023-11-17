@@ -1,88 +1,43 @@
 import './App.css'
 import CardBox from './components/card'
-import { Button } from './components/ui/button'
-import { useToast } from './components/ui/use-toast'
+import { useUsers } from './hooks/useUsers'
+import BeatLoader from 'react-spinners/BeatLoader'
+import reactQuery from "./assets/react-query.svg"
 
-// https://jsonplaceholder.typicode.com/todos
 function App() {
-
-  const { toast } = useToast()
-  const body = {
-
-    "emailTo": "ngockhoe.le@kepland.com.vn",
-    "token": "YnKePgTZVn9ohthTwAfQxQL0Fu1zWnQfKbJmFJGTV7HW73XQ9FUA",
-    "requestedBy": "Khoe Le",
-    "emailCC": "ngockhoe.le@kepland.com.vn",
-    "approvalPerson": "A. Thien",
-    "requestCode": "azkxfk3k2k32k",
-    "requestDescription": "ke ba tao diii",
-    "categoryName": "ví duu",
-    "requestDisplayName": "ai biet",
-    "linkOfRequest": "https://portal.keppland.com.vn",
-    "type": 2
-  }
-
-  const url = 'https://klvportalapidev.azurewebsites.net/api/Common/EASSendEmail'
-
-  const handleSendEmail = async () => {
-    try {
-      const res = await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(body),
-      });
-
-      const data = await res.json();
-      toast({
-        variant: 'success',
-        title: 'Send Email.',
-        description: 'Send Email Success.',
-      });
-
-      console.log(res);
-      console.log(data);
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Send Email.',
-        description: 'Send Email error.',
-      });
-    }
-  };
+  const { error, isLoading, data: users } = useUsers()
 
   return (
     <div className='py-12 px-12 relative'>
-      <div className='flex flex-col'>
-        <h1 className="text-4xl font-bold text-center text-indigo-400">
-          Welcome to Vite + React + Tailwind CSS + Zustand + TypeScript starter!
-        </h1>
-        <div className=' flex justify-center mb-4 py-6'>
-          <img src='https://github.com/pmndrs/zustand/raw/main/bear.jpg' alt='' />
+      <div className="flex flex-col items-center gap-6 text-center px-4 py-12 lg:py-24">
+          <div className="flex gap-2 lg:gap-4 items-center">
+            <div className="w-[60px] md:w-[80px] lg:w-[120px]">
+              <img src={reactQuery}
+                alt="TanStack Logo" />
+            </div>
+            <h1 className="inline-block font-black text-5xl md:text-6xl lg:text-8xl">
+              <span
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-violet-500 underline decoration-4 md:decoration-8 underline-offset-[.5rem] md:underline-offset-[1rem] decoration-gray-200 dark:decoration-gray-800 mb-2">Welcome to Vite + React + Tailwind CSS + Zustand + TypeScript starter!</span>
+            </h1>
+          </div>
+          <h2 className="font-bold text-2xl max-w-md md:text-3xl lg:text-5xl lg:max-w-2xl">
+            High-quality open-source software for 
+            <span className="underline decoration-dashed decoration-yellow-500 decoration-3 underline-offset-2"> web
+              developers.</span>
+          </h2>
+          <p className="text opacity-90 max-w-sm lg:text-xl lg:max-w-2xl">
+            Headless, type-safe, &amp; powerful utilities for State Management,
+            Routing, Data Visualization, Charts, Tables, and more.
+          </p>
         </div>
-      </div>
-
-      <div>
-        <Button onClick={handleSendEmail}>Send Email</Button>
-      </div>
-
-      <div className='px-12 py-12 flex flex-1 justify-center content-center'>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
-          <CardBox />
+      
+      <>
+        <div className='flex justify-center'>
+          <BeatLoader color='#10B981' loading={isLoading} size={24} />
         </div>
-      </div>
+        {error && <div className='text-red-500 text-center'>{error.message}</div>}
+        <CardBox users={users} />
+      </>
     </div>
   )
 }

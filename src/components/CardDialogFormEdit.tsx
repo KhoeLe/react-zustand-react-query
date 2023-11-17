@@ -3,7 +3,7 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { useState } from 'react'
-import { useToast } from './ui/use-toast'
+import { useUpdateUser, useUser } from '@/hooks/useUsers'
 
 type Props = {
     title: string,
@@ -15,14 +15,14 @@ type Props = {
         type?: string,
         label: string,
         defaultValue?: string,
-    }[]
+    }[],
 }
 
 
-function DialogCloseButton({ title, description, triggerContent, inputFields }: Props) {
+function CardDialogFormEdit({ title, description, triggerContent, inputFields }: Props) {
 
-    const { toast } = useToast()
-    const [open, setOpen] = useState(false);
+    const updateUser = useUpdateUser()
+    const [isOpen, setIsOpen] = useState(false);
 
     const [formValues, setFormValues] = useState<Record<string, string>>(
         inputFields.reduce((acc: Record<string, string>, field) => {
@@ -31,40 +31,20 @@ function DialogCloseButton({ title, description, triggerContent, inputFields }: 
         }, {})
     );
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const { data: getUser } = useUser(isOpen ? formValues.id?.toString() : '')
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // You can access the form values from the formValues state
-        console.log('Form values:', formValues);
-        // Add logic to submit the form data to your backend or perform other actions here
 
-        try {
-            // throw 500; 
-            setOpen(false);
-            toast({
-                variant: "success",
-                title: "Updated Profile",
-                description: "We've updated your profile",
-            })
-        } catch (error) {
-            
-            // setOpen(false);
+        const { id, name, avatar } = formValues;
 
-            toast({
-                variant: "destructive",
-                title: "Update Failed",
-                description: "We've failed to update your profile",
-            })
+        const updatedUser = { ...getUser, name, avatar, id: Number(id) };
 
-           
+        // Submit the updated user data
+        await updateUser(updatedUser);
 
-        } finally {
-            setOpen(false);
-
-            console.log('finally')
-        }
-        
+        setIsOpen(false);
     };
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setFormValues((prevFormValues) => ({
@@ -72,14 +52,11 @@ function DialogCloseButton({ title, description, triggerContent, inputFields }: 
             [id]: value,
         }));
 
-
-        console.log('formChange', `${[id]}: ${value}`)
     };
 
 
-
     return (
-        <Dialog open={open} onOpenChange={setOpen} >
+        <Dialog open={isOpen} onOpenChange={setIsOpen} >
             <DialogTrigger asChild>
                 {triggerContent}
             </DialogTrigger>
@@ -92,7 +69,7 @@ function DialogCloseButton({ title, description, triggerContent, inputFields }: 
                     <div className="grid gap-4 py-4">
                         {inputFields.map((input, index) => (
                             <div key={index} className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor={input.id} className="text-right">
+                                <Label htmlFor={input.id} className={`text-right ${input.type ? 'hidden' : 'block'}`}>
                                     {input.label}
                                 </Label>
                                 <Input
@@ -115,4 +92,4 @@ function DialogCloseButton({ title, description, triggerContent, inputFields }: 
     )
 }
 
-export default DialogCloseButton
+export default CardDialogFormEdit

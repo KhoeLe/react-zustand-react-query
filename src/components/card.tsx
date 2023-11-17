@@ -1,5 +1,4 @@
-import AlertDialogMes from "./AlertDialogMes";
-import DialogCloseButton from "./DialogCloseButton";
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -8,56 +7,98 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { useToast } from "./ui/use-toast";
+import { User } from "@/hooks/useUsers";
+import CardDialogFormEdit from "./CardDialogFormEdit";
+import CardDialogDelete from "./CardDialogDelete";
 
-function CardBox() {
+type Props = {
+  users: User[] | undefined;
+};
 
-  const { toast } = useToast()
+function CardBox({ users, }: Props) {
 
-  const handleAction = () => {
-    toast({
-      variant: "destructive",
-      title: "Account deleted.",
-      description: "We've permanently deleted your account.",
-    })
-
-  };
   return (
-    <div className="flex justify-center ">
-      <Card>
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <img
-            className="border rounded-md"
-            src="https://media.istockphoto.com/id/1129342275/photo/enjoying-his-favorite-music.jpg?s=612x612&w=0&k=20&c=_ZQGnCMOJNB1AplPnmzu8wQbpetH-n5wX8Ex3TD4YRI="
-            alt=""
-          />
-        </CardContent>
+    <>
+      <div className="px-12 py-12 flex flex-1 justify-center content-center">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"></div>
+      </div>
 
-        <div className="flex justify-between px-2 mx-2 py-4 lg:px-4">
-          {/* <DialogCloseButton  /> */}
-          <DialogCloseButton
-            title="Edit Profile"
-            description="Make changes to your profile here. Click save when you're done."
-            triggerContent={<Button variant="outline">Edit</Button>}
-            inputFields={[
-              { label: 'Name', id: 'name', defaultValue: 'Pedro Duarte' },
-              { label: 'Username', id: 'username', defaultValue: '@peduarte' },
-              { label: 'Password', id: 'password', defaultValue: '@peduarte', type: 'password' },
-              // Add more input field configurations as needed
-            ]}
-          />
-          <AlertDialogMes handleAction={handleAction} text="Delete" variant="destructive" title="Are you absolutely sure?" desc="This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers."/>
+      <div></div>
+
+      <div className="flex justify-center relative">
+        <div className="absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-pink-600 via-violet-600 to-neutral-600 opacity-50 blur-2xl"></div>
+
+        <div className="relative">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            {users?.map((user) => (
+              <Card
+                key={user.id}
+                className={cn(`flex flex-col justify-between ${user.status === false ? "hidden" : ""}`)}
+              >
+                <CardHeader>
+                  <CardTitle>{user.name}</CardTitle>
+                  <CardDescription>Card Description</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="w-full sm:w-[100px] md:w-[150px] lg:w-[120px] xl:w-[250px]">
+                    <img
+                      className="border rounded-md w-full object-cover items-center content-center"
+                      src={user.avatar}
+                      alt=""
+                    />
+                  </div>
+                </CardContent>
+
+                <div className="flex justify-between px-2 mx-2 py-4 lg:px-4 ">
+                  <CardDialogFormEdit
+                    title="Edit Profile"
+                    description="Make changes to your profile here. Click save when you're done."
+                    triggerContent={<Button variant="outline">Edit</Button>}
+                    inputFields={
+
+                      [
+                        {
+                          label: "User ID",
+                          id: "id",
+                          defaultValue: user.id.toString(),
+                          type: "hidden"
+                        },
+                        {
+
+                          label: "Name",
+                          id: "name",
+                          defaultValue: user.name,
+                        },
+                        {
+                          label: "Avatar",
+                          id: "avatar",
+                          defaultValue: user.avatar,
+                        },
+
+                        // {
+                        //   label: "Password",
+                        //   id: "password",
+                        //   defaultValue: "@peduarte",
+                        //   type: "password",
+                        // },
+                        // Add more input field configurations as needed
+                      ]}
+                  />
+                  <CardDialogDelete
+                    user={user}
+                    text="Delete"
+                    variant="destructive"
+                    title="Are you absolutely sure?"
+                    desc="This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers."
+                  />
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
-      </Card>
-    </div>
-
-
-
+      </div>
+    </>
   );
 }
 
