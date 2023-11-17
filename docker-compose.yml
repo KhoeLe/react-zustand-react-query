@@ -1,0 +1,12 @@
+# docker-compose.yml
+
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: pm2-runtime start npm -- run dev server
