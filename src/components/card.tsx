@@ -75,12 +75,12 @@ function CardBox({ users, }: Props) {
                           defaultValue: user.avatar,
                         },
 
-                        // {
-                        //   label: "Password",
-                        //   id: "password",
-                        //   defaultValue: "@peduarte",
-                        //   type: "password",
-                        // },
+                        {
+                          label: "Password",
+                          id: "password",
+                          defaultValue: "@peduarte",
+                          type: "password",
+                        },
                         // Add more input field configurations as needed
                       ]}
                   />
