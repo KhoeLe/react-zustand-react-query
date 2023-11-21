@@ -22,7 +22,7 @@ const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
-type InputFieldId = "id" | "name" | "avatar" ;
+type InputFieldId = "id" | "name" | "avatar";
 
 type Props = {
   afterSave: () => void;
@@ -50,7 +50,7 @@ function CardForm({ afterSave, inputFields }: Props) {
     }
   })
 
-  const onSubmit =async (values: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     setSaving(true);
     const updatedUser = { ...getUser, ...values, id: parseInt(values.id) };
     await updateUser(updatedUser);
@@ -60,15 +60,16 @@ function CardForm({ afterSave, inputFields }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} data-cy="form" className="space-y-8">
         <fieldset disabled={saving}>
           {inputFields.map((input, index) => (
             <div key={index} className={`${input.type === "hidden" ? 'hidden' : ''}`}>
               <FormField
+                data-cy="dialog"
                 control={form.control}
                 name={input.id as InputFieldId}
                 render={({ field }) => (
-                  
+
                   <FormItem>
                     <FormLabel>{input.label}</FormLabel>
                     <FormControl>
@@ -80,7 +81,7 @@ function CardForm({ afterSave, inputFields }: Props) {
               />
             </div>
           ))}
-          <Button  className="my-5" type="submit">Submit</Button>
+          <Button data-cy="save-button" className="my-5" type="submit">Submit</Button>
         </fieldset>
       </form>
     </Form>

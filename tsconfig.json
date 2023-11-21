@@ -22,9 +22,10 @@
          "@/*": [
             "./src/*"
          ]
-      }
+      },
+      "types": ["cypress", "node"]
    },
-   "include": ["src"],
+   "include": ["src","**/*.ts", "**/*.tsx", "vite.config.ts"],
    "references": [
       {
          "path": "./tsconfig.node.json"

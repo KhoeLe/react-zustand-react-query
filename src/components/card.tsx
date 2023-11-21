@@ -61,7 +61,7 @@ function CardBox({ users, setSearchTerm}: Props) {
                   <CardDialogFormEdit
                     title="Edit Profile"
                     description="Make changes to your profile here. Click save when you're done."
-                    triggerContent={<Button variant="outline">Edit</Button>}
+                    triggerContent={<Button  variant="outline">Edit</Button>}
                     inputFields={
 
                       [
