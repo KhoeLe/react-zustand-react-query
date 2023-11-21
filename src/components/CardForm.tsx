@@ -18,11 +18,11 @@ const formSchema = z.object({
   id: z.string(),
   name: z.string().min(2).max(50),
   avatar: z.string().url(),
-  password: z.string().min(8).max(50),
+  // password: z.string().min(8).max(50),
 });
 
 type FormValues = z.infer<typeof formSchema>;
-type InputFieldId = "id" | "name" | "avatar" | "password";
+type InputFieldId = "id" | "name" | "avatar" ;
 
 type Props = {
   afterSave: () => void;
@@ -46,7 +46,7 @@ function CardForm({ afterSave, inputFields }: Props) {
       id: inputFields[0].defaultValue || "",
       name: inputFields[1].defaultValue || "",
       avatar: inputFields[2].defaultValue || "",
-      password: inputFields[3].defaultValue || "",
+      // password: inputFields[3].defaultValue || "",
     }
   })
 

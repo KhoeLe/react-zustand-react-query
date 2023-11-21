@@ -10,24 +10,32 @@ import {
 import { User } from "@/hooks/useUsers";
 import CardDialogFormEdit from "./CardDialogFormEdit";
 import CardDialogDelete from "./CardDialogDelete";
+import { Input } from "./ui/input";
 
 type Props = {
   users: User[] | undefined;
+  setSearchTerm: (searchTerm: string) => void;
 };
 
-function CardBox({ users, }: Props) {
+function CardBox({ users, setSearchTerm}: Props) {
 
   return (
     <>
-      <div className="px-12 py-12 flex flex-1 justify-center content-center">
+      {/* <div className="px-12 py-12 flex flex-1 justify-center content-center">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"></div>
+      </div> */}
+
+      <div className="my-5 flex justify-end ">
+          <Input
+            placeholder="Filter name..."
+            className="max-w-md w-full"
+            onChange={e => setSearchTerm(e.target.value)}
+          />
       </div>
 
-      <div></div>
 
-      <div className="flex justify-center relative">
+      <div className="flex flex-col content-center relative">
         <div className="absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-pink-600 via-violet-600 to-neutral-600 opacity-50 blur-2xl"></div>
-
         <div className="relative">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             {users?.map((user) => (
@@ -75,12 +83,12 @@ function CardBox({ users, }: Props) {
                           defaultValue: user.avatar,
                         },
 
-                        {
-                          label: "Password",
-                          id: "password",
-                          defaultValue: "@peduarte",
-                          type: "password",
-                        },
+                        // {
+                        //   label: "Password",
+                        //   id: "password",
+                        //   defaultValue: "@peduarte",
+                        //   type: "password",
+                        // },
                         // Add more input field configurations as needed
                       ]}
                   />

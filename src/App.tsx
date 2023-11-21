@@ -3,10 +3,15 @@ import CardBox from './components/card'
 import { useUsers } from './hooks/useUsers'
 import BeatLoader from 'react-spinners/BeatLoader'
 import reactQuery from "./assets/react-query.svg"
+import { useState } from 'react'
+import { useDebounce } from './lib/debounce'
 
 function App() {
-  const { error, isLoading, data: users } = useUsers()
+  const [searchTerm, setSearchTerm] = useState('' as string)
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const { error, isLoading, data: users } = useUsers(debouncedSearchTerm)
 
+  console.log(debouncedSearchTerm)
   return (
     <div className='py-12 px-12 relative'>
       <div className="flex flex-col items-center gap-6 text-center px-4 py-12 lg:py-24">
@@ -36,7 +41,7 @@ function App() {
           <BeatLoader color='#10B981' loading={isLoading} size={24} />
         </div>
         {error && <div className='text-red-500 text-center'>{error.message}</div>}
-        <CardBox users={users} />
+        <CardBox setSearchTerm={setSearchTerm}  users={users} />
       </>
     </div>
   )

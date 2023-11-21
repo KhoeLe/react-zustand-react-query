@@ -48,15 +48,22 @@ const deleteUser = async (id: string) => {
 
 // Implement to use React Query
 
-export const useUsers = () => {
+export const useUsers = (searchTerm?: string) => {
   return useQuery({
-    queryKey: ['GET_ALL_USERS'],
+    queryKey: ['GET_ALL_USERS', searchTerm],
     queryFn: async () => {
       const data = await getUsers();
+      if (searchTerm) {
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+        return data.filter(user => user.name && user.name.toLowerCase().includes(lowerCaseSearchTerm));
+      }
       return data;
     },
+    staleTime: 1000,
   });
 };
+
+// const productsQuery = useQuery({ queryKey: ['products', ...searchParams], queryFn: fetchProducts, keepPreviousData: true, staleTime: 1000 });
 
 export const useUser = (id: string) => {
   return useQuery({
@@ -67,6 +74,7 @@ export const useUser = (id: string) => {
     },
   });
 }
+
 
 export const useUpdateUser = () => {
   const client = useQueryClient();
