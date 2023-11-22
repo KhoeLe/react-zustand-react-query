@@ -16,13 +16,13 @@ describe('CardForm component Create', () => {
 
     });
 
-    cy.get('[data-cy=form]').within(() => { // assumes that the form has a `data-cy="form"` attribute
+    cy.get('[data-cy=form]').within(() => { 
       const randomName = `Name ${Math.floor(Math.random() * 1000)}`; // generates a random name like "Name 123"
       const randomAvatar = `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`; // generates a random avatar URL
 
       cy.get('input[name=name]').clear().type(randomName);
       cy.get('input[name=avatar]').clear().type(randomAvatar);
-      cy.get('[data-cy=save-button]').click(); // assumes that the save button has a `data-cy="save-button"` attribute
+      cy.get('[data-cy=save-button]').click();
     });
   });
 })
@@ -36,13 +36,13 @@ describe('CardForm component Edit', () => {
       cy.wrap($elements).eq(randomIndex).click({ force: true });
     });
 
-    cy.get('[data-cy=form]').within(() => { // assumes that the form has a `data-cy="form"` attribute
+    cy.get('[data-cy=form]').within(() => { 
       const randomName = `Name ${Math.floor(Math.random() * 1000)}`; // generates a random name like "Name 123"
       const randomAvatar = `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`; // generates a random avatar URL
 
       cy.get('input[name=name]').clear().type(randomName);
       cy.get('input[name=avatar]').clear().type(randomAvatar);
-      cy.get('[data-cy=save-button]').click(); // assumes that the save button has a `data-cy="save-button"` attribute
+      cy.get('[data-cy=save-button]').click(); 
     });
 
     // Check that the form has been submitted with the new values
