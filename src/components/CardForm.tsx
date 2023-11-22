@@ -12,7 +12,7 @@ import { Input } from "./ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useUpdateUser, useUser } from "@/hooks/useUsers";
+import { useCreateUser, useUpdateUser, useUser } from "@/hooks/useUsers";
 
 const formSchema = z.object({
   id: z.string(),
@@ -32,11 +32,13 @@ type Props = {
     label: string;
     defaultValue?: string | undefined;
   }[];
+  mode:'create' | 'edit';
 };
 
-function CardForm({ afterSave, inputFields }: Props) {
+function CardForm({ afterSave, inputFields, mode }: Props) {
   const [saving, setSaving] = useState(false);
   const updateUser = useUpdateUser()
+  const createUser = useCreateUser()
 
   const { data: getUser } = useUser(!saving ? (inputFields[0].defaultValue ?? '').toString() : '');
 
@@ -52,9 +54,15 @@ function CardForm({ afterSave, inputFields }: Props) {
 
   const onSubmit = async (values: FormValues) => {
     setSaving(true);
-    const updatedUser = { ...getUser, ...values, id: parseInt(values.id) };
-    await updateUser(updatedUser);
-    console.log(values);
+    if(mode === 'edit'){
+      const updatedUser = { ...getUser, ...values, id: parseInt(values.id) };
+      await updateUser(updatedUser);
+    }else{
+        // do create
+        const randomId = Math.floor(Math.random() * 1000); // generates a random ID between 0 (inclusive) and 1000000 (exclusive)
+        const createdUser = {...values, id: randomId };
+        createUser(createdUser);
+    }
     afterSave();
   };
 

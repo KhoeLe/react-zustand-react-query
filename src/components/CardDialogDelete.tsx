@@ -20,24 +20,27 @@ function CardDialogDelete({ variant, title, desc, text, user }: AlertDialogMesPr
     };
 
     return (
+        <form data-cy="form-delete">
+            <AlertDialog  >
+                <AlertDialogTrigger data-cy="dialog-trigger-delete" asChild>
+                    <Button variant={variant}>{text}</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>{title}</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            {desc}
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction data-cy="delete-button"  onClick={() => handleAction(user.id.toString())}>Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
 
-        <AlertDialog >
-            <AlertDialogTrigger asChild>
-                <Button variant={variant}>{text}</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>{title}</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        {desc}
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => handleAction(user.id.toString())}>Continue</AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+        </form>
+
     )
 }
 

@@ -11,6 +11,7 @@ import { User } from "@/hooks/useUsers";
 import CardDialogFormEdit from "./CardDialogFormEdit";
 import CardDialogDelete from "./CardDialogDelete";
 import { Input } from "./ui/input";
+import CardDialogCreate from "./cardDialogCreate";
 
 type Props = {
   users: User[] | undefined;
@@ -24,14 +25,45 @@ function CardBox({ users, setSearchTerm}: Props) {
       {/* <div className="px-12 py-12 flex flex-1 justify-center content-center">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"></div>
       </div> */}
+      <div className="my-5 flex justify-end">
+            <CardDialogCreate
+                    title="Create Profile"
+                    description="Make changes to your profile here. Click save when you're done."
+                    triggerContent={<Button className="mt-2" >Create Form</Button>}
+                    inputFields={
+
+                      [
+                        {
+                          label: "User ID",
+                          id: "id",
+                          defaultValue: "id",
+                          type: "hidden"
+                        },
+                        {
+
+                          label: "Name",
+                          id: "name",
+                          defaultValue: "name",
+                        },
+                        {
+                          label: "Avatar",
+                          id: "avatar",
+                          defaultValue: "url",
+                        },
+                      ]}
+                  />
+      </div>
 
       <div className="my-5 flex justify-end ">
           <Input
+            data-cy="search"
             placeholder="Filter name..."
             className="max-w-md w-full"
             onChange={e => setSearchTerm(e.target.value)}
           />
+        
       </div>
+      
 
 
       <div className="flex flex-col content-center relative">

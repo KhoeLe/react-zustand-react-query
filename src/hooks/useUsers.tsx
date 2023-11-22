@@ -25,6 +25,16 @@ const getUser: GetUser = async (id: string) => {
   return res.data;
 }
 
+const createUser = async (userBody: User) => {
+  try {
+    const res = await axios.post('/users', userBody);
+    return res.data;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw error;
+  }
+}
+
 const editUser: EditUser = async (userBody: User) => {
   try {
     const res = await axios.put(`/users/${userBody.id}`, userBody);
@@ -59,11 +69,10 @@ export const useUsers = (searchTerm?: string) => {
       }
       return data;
     },
-    staleTime: 1000,
+    // staleTime: 1000,
   });
 };
 
-// const productsQuery = useQuery({ queryKey: ['products', ...searchParams], queryFn: fetchProducts, keepPreviousData: true, staleTime: 1000 });
 
 export const useUser = (id: string) => {
   return useQuery({
@@ -73,6 +82,31 @@ export const useUser = (id: string) => {
       return data;
     },
   });
+}
+
+export const useCreateUser = () => {
+  const client = useQueryClient();
+  const { mutate: createUserInfo } =useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['GET_ALL_USERS'] });
+      toast({
+        variant: "success",
+        title: "Created Profile",
+        description: "We've created your profile",
+      })
+    },
+    onError: (error) => {
+      console.error('Error creating user:', error);
+      toast({
+        variant: "destructive",
+        title: "Create Failed",
+        description: "We've failed to create your profile",
+      })
+    },
+  })
+
+  return createUserInfo;
 }
 
 

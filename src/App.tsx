@@ -13,7 +13,7 @@ function App() {
 
   console.log(debouncedSearchTerm)
   return (
-    <div className='py-12 px-12 relative'>
+    <div className='py-12 px-12 md:py-12 md:px-12 xl:py-32 xl:px-32 relative'>
       <div className="flex flex-col items-center gap-6 text-center px-4 py-12 lg:py-24">
         <div className="flex gap-2 lg:gap-4 items-center">
           <div className="w-[60px] md:w-[80px] lg:w-[120px]">
