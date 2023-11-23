@@ -15,6 +15,7 @@ jobs:
         # add the line below to store screenshots only on failures
         # if: failure()
         with:
+          install: false
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
