@@ -64,10 +64,6 @@ describe('CardForm component Delete' ,() =>{
   })
 })
 
-describe('CardForm component Add', () => {
-
-})
-
 describe('search filter name', () => {
   it('searches the name', () => {
     cy.visit('http://localhost:5173/')

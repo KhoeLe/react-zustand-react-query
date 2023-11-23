@@ -76,7 +76,7 @@ export const useUsers = (searchTerm?: string) => {
 
 export const useUser = (id: string) => {
   return useQuery({
-    queryKey: ['GET_USER', id],
+    queryKey: ['GET_USER_ID', id],
     queryFn: async () => {
       const data = await getUser(id);
       return data;

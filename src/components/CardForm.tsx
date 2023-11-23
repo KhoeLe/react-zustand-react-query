@@ -55,13 +55,14 @@ function CardForm({ afterSave, inputFields, mode }: Props) {
   const onSubmit = async (values: FormValues) => {
     setSaving(true);
     if(mode === 'edit'){
+      // do edit
       const updatedUser = { ...getUser, ...values, id: parseInt(values.id) };
       await updateUser(updatedUser);
     }else{
         // do create
-        const randomId = Math.floor(Math.random() * 1000); // generates a random ID between 0 (inclusive) and 1000000 (exclusive)
-        const createdUser = {...values, id: randomId };
-        createUser(createdUser);
+      const randomId = Math.floor(Math.random() * 1000); 
+      const createdUser = {...values, id: randomId };
+      createUser(createdUser);
     }
     afterSave();
   };

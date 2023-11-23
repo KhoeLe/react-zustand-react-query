@@ -36,7 +36,7 @@ function CardBox({ users, setSearchTerm}: Props) {
                         {
                           label: "User ID",
                           id: "id",
-                          defaultValue: "id",
+                          defaultValue: "",
                           type: "hidden"
                         },
                         {
