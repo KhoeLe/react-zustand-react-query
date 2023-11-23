@@ -47,11 +47,11 @@
     },
     {
       "id": "5",
-      "name": "Name 170",
+      "name": "Name 4 12341231",
       "width": 5000,
       "height": 3334,
       "webvisit": "https://unsplash.com/photos/LF8gK8-HGSg",
-      "avatar": "https://picsum.photos/200/300?random=613",
+      "avatar": "https://picsum.photos/200/300?random=409",
       "status": false
     },
     {
@@ -325,11 +325,6 @@
       "id": 299,
       "name": "Name 255",
       "avatar": "https://picsum.photos/200/300?random=507"
-    },
-    {
-      "id": 313,
-      "name": "Name 777",
-      "avatar": "https://picsum.photos/200/300?random=523"
     }
   ]
 }

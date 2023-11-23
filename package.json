@@ -9,8 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server --watch db.json --port 8000",
-    "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "test": "cypress open"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
