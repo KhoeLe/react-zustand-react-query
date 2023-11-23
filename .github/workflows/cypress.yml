@@ -10,17 +10,14 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
-      # after the test run completes store videos and any screenshots
-      - uses: actions/upload-artifact@v3
-        # add the line below to store screenshots only on failures
-        # if: failure()
         with:
-          install: false
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-      - uses: actions/upload-artifact@v3
-        with:
-          name: cypress-videos
-          path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          build: npm run build
+          start: npm run start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+          wait-on-timeout-error: 'Timed out waiting for localhost:3000'
+          wait-on-retry-interval: 1000
+          wait-on-silent-output: true
+          cypress-command: npm run cypress:run
+          cypress-cache-folder: ${{ runner.temp }}/.cache/Cypress
+          cypress-run-args: --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
