@@ -32,7 +32,7 @@ type Props = {
     label: string;
     defaultValue?: string | undefined;
   }[];
-  mode:'create' | 'edit';
+  mode: 'create' | 'edit';
 };
 
 function CardForm({ afterSave, inputFields, mode }: Props) {
@@ -54,14 +54,14 @@ function CardForm({ afterSave, inputFields, mode }: Props) {
 
   const onSubmit = async (values: FormValues) => {
     setSaving(true);
-    if(mode === 'edit'){
+    if (mode === 'edit') {
       // do edit
       const updatedUser = { ...getUser, ...values, id: parseInt(values.id) };
       await updateUser(updatedUser);
-    }else{
-        // do create
-      const randomId = Math.floor(Math.random() * 1000); 
-      const createdUser = {...values, id: randomId };
+    } else {
+      // do create
+      const randomId = Math.floor(Math.random() * 1000);
+      const createdUser = { ...values, id: randomId };
       createUser(createdUser);
     }
     afterSave();

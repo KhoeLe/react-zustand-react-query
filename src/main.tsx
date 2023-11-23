@@ -7,14 +7,18 @@ import ToasterProvider from './providers/ToasterProvider.tsx'
 import './index.css'
 
 
-axios.defaults.baseURL = 'http://localhost:8000'
+if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = 'http://localhost:8000';
+} else if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = window.location.origin;
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ReactQueryProvider>
-        <ToasterProvider />
+      <ToasterProvider />
 
-            <App />
+      <App />
     </ReactQueryProvider>
   </React.StrictMode>,
 )

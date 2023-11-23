@@ -18,7 +18,7 @@ type Props = {
   setSearchTerm: (searchTerm: string) => void;
 };
 
-function CardBox({ users, setSearchTerm}: Props) {
+function CardBox({ users, setSearchTerm }: Props) {
 
   return (
     <>
@@ -26,44 +26,44 @@ function CardBox({ users, setSearchTerm}: Props) {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"></div>
       </div> */}
       <div className="my-5 flex justify-end">
-            <CardDialogCreate
-                    title="Create Profile"
-                    description="Make changes to your profile here. Click save when you're done."
-                    triggerContent={<Button className="mt-2" >Create Form</Button>}
-                    inputFields={
+        <CardDialogCreate
+          title="Create Profile"
+          description="Make changes to your profile here. Click save when you're done."
+          triggerContent={<Button className="mt-2" >Create Form</Button>}
+          inputFields={
 
-                      [
-                        {
-                          label: "User ID",
-                          id: "id",
-                          defaultValue: "",
-                          type: "hidden"
-                        },
-                        {
+            [
+              {
+                label: "User ID",
+                id: "id",
+                defaultValue: "",
+                type: "hidden"
+              },
+              {
 
-                          label: "Name",
-                          id: "name",
-                          defaultValue: "name",
-                        },
-                        {
-                          label: "Avatar",
-                          id: "avatar",
-                          defaultValue: "url",
-                        },
-                      ]}
-                  />
+                label: "Name",
+                id: "name",
+                defaultValue: "name",
+              },
+              {
+                label: "Avatar",
+                id: "avatar",
+                defaultValue: "url",
+              },
+            ]}
+        />
       </div>
 
       <div className="my-5 flex justify-end ">
-          <Input
-            data-cy="search"
-            placeholder="Filter name..."
-            className="max-w-md w-full"
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-        
+        <Input
+          data-cy="search"
+          placeholder="Filter name..."
+          className="max-w-md w-full"
+          onChange={e => setSearchTerm(e.target.value)}
+        />
+
       </div>
-      
+
 
 
       <div className="flex flex-col content-center relative">
@@ -93,7 +93,7 @@ function CardBox({ users, setSearchTerm}: Props) {
                   <CardDialogFormEdit
                     title="Edit Profile"
                     description="Make changes to your profile here. Click save when you're done."
-                    triggerContent={<Button  variant="outline">Edit</Button>}
+                    triggerContent={<Button variant="outline">Edit</Button>}
                     inputFields={
 
                       [

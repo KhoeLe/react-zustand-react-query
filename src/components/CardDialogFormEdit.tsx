@@ -36,7 +36,7 @@ function CardDialogFormEdit({
   return (
     <div>
       <Dialog open={isOpen} onOpenChange={setIsOpen} >
-        <DialogTrigger data-cy="dialog-trigger"  asChild>{triggerContent}</DialogTrigger>
+        <DialogTrigger data-cy="dialog-trigger" asChild>{triggerContent}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle >{title}</DialogTitle>

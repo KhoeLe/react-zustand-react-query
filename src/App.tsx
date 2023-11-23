@@ -34,13 +34,13 @@ function App() {
           Routing, Data Visualization, Charts, Tables, and more.
         </p>
       </div>
-      
+
       <>
         <div className='flex justify-center'>
           <BeatLoader color='#10B981' loading={isLoading} size={24} />
         </div>
         {error && <div className='text-red-500 text-center'>{error.message}</div>}
-        <CardBox setSearchTerm={setSearchTerm}  users={users} />
+        <CardBox setSearchTerm={setSearchTerm} users={users} />
       </>
     </div>
   )

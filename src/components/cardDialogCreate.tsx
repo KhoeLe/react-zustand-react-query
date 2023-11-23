@@ -16,13 +16,13 @@ type Props = {
 };
 
 
-function CardDialogCreate({title, description,triggerContent,inputFields}: Props) {
+function CardDialogCreate({ title, description, triggerContent, inputFields }: Props) {
 
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
       <Dialog open={isOpen} onOpenChange={setIsOpen} >
-        <DialogTrigger data-cy="dialog-trigger-create"  asChild>{triggerContent}</DialogTrigger>
+        <DialogTrigger data-cy="dialog-trigger-create" asChild>{triggerContent}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle >{title}</DialogTitle>
