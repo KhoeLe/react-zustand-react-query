@@ -17,11 +17,12 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true,
-      "baseUrl": ".",
+      "baseUrl": "./src", // This is to avoid adding the ./src prefix to each path below.
       "paths": {
-         "@/*": [
-            "./src/*"
-         ]
+         "@components/*": ["components/*"],
+         "@hooks/*": ["hooks/*"],
+         "@utils/*": ["utils/*"],
+         "@config/*": ["config/*"]
       },
       "types": ["cypress", "node"]
    },

@@ -12,7 +12,7 @@ import { Input } from "./ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useCreateUser, useUpdateUser, useUser } from "@/hooks/useUsers";
+import { useCreateUser, useUpdateUser, useUser } from "@hooks/useUsers";
 
 const formSchema = z.object({
   id: z.string(),

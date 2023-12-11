@@ -1,10 +1,10 @@
 import './App.css'
-import CardBox from './components/card'
 import { useUsers } from './hooks/useUsers'
 import BeatLoader from 'react-spinners/BeatLoader'
 import reactQuery from "./assets/react-query.svg"
 import { useState } from 'react'
-import { useDebounce } from './lib/debounce'
+import CardBox from '@components/card'
+import { useDebounce } from 'lib/debounce'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('' as string)

@@ -1,4 +1,4 @@
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@components/ui/use-toast";
 import {useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
