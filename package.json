@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.8.3",
-    "@types/jest": "^29.5.9",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.8.10",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
